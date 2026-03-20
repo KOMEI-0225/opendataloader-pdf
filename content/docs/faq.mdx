@@ -128,6 +128,28 @@ Output:
 
 Coordinates are `[left, bottom, right, top]` in PDF points (72 points = 1 inch).
 
+### How do I convert PDF to Markdown?
+
+Use the `markdown` output format.
+
+CLI:
+```bash
+opendataloader-pdf document.pdf -o ./output -f markdown
+```
+
+Python:
+```python
+import opendataloader_pdf
+
+opendataloader_pdf.convert(
+    input_path="document.pdf",
+    output_dir="output/",
+    format="markdown",
+)
+```
+
+For page delimiters, use `--markdown-page-separator` in CLI.
+
 ### What output formats are available?
 
 | Format | Use Case |
@@ -178,6 +200,20 @@ PDFs can contain hidden text designed for prompt injection attacks — invisible
 - Suspicious invisible layers
 
 This is **enabled by default**. Learn more in our [AI Safety documentation](/docs/ai-safety).
+
+### How can I run security checks and find vulnerabilities?
+
+Use the built-in safety and review workflow:
+
+1. Keep AI safety filters enabled (default) to block hidden prompt-injection text.
+2. Use `--sanitize` when you need to redact sensitive values before downstream use.
+3. Keep dependencies updated and run ecosystem vulnerability checks in your environment (for example, `npm audit` for Node.js dependencies).
+4. If you discover a potential vulnerability, report it privately following our [Security Policy](https://github.com/opendataloader-project/opendataloader-pdf/security/policy).
+
+### 会社のPCで使うことは可能ですか？
+
+はい、可能です。OpenDataLoader PDF はローカル環境で動作し、PDF データをクラウドへ送信しません。  
+そのため、社内ドキュメントや機密情報を扱う用途でも利用しやすい設計です。必要に応じて `--sanitize` を有効化して、個人情報などを置換してから後続処理に渡せます。
 
 ### Is my data safe?
 
